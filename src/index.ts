@@ -7,7 +7,7 @@ const CONTROLLED_ITEMS = ['editor.fontFamily', 'editor.fontLigatures', 'editor.f
 interface Profile { [key: string]: any }
 
 function setupProfiles(e?: ConfigurationChangeEvent) {
-  if (!e?.affectsConfiguration(EXT_ID)) return
+  if (e && !e.affectsConfiguration(EXT_ID)) return
 
   const extConfig = workspace.getConfiguration(EXT_ID)
   const allConfig = workspace.getConfiguration()
