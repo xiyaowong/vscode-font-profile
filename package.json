@@ -1,0 +1,174 @@
+{
+  "publisher": "xiyaowong",
+  "name": "font-profile",
+  "displayName": "Font Profile",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "pnpm@8.10.5",
+  "description": "A mini plugin used for managing font configurations.",
+  "license": "MIT",
+  "homepage": "https://github.com/xiyaowong/vscode-font-profile",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiyaowong/vscode-font-profile"
+  },
+  "bugs": {
+    "url": "https://github.com/xiyaowong/vscode-font-profile/issues"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/index.js",
+  "icon": "res/icon.png",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "vscode": "^1.83.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "configuration": {
+      "title": "Font Profile",
+      "properties": {
+        "font-profile.profile": {
+          "type": "string",
+          "default": null,
+          "description": "The profile to use."
+        },
+        "font-profile.profiles": {
+          "type": "object",
+          "default": {},
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "editor.fontFamily": {
+                "description": "Controls the font family.",
+                "type": "string",
+                "default": "Consolas, 'Courier New', monospace",
+                "defaultDefaultValue": "Consolas, 'Courier New', monospace",
+                "scope": 5,
+                "restricted": false
+              },
+              "editor.fontLigatures": {
+                "anyOf": [
+                  {
+                    "type": "boolean",
+                    "description": "Enables/Disables font ligatures ('calt' and 'liga' font features). Change this to a string for fine-grained control of the 'font-feature-settings' CSS property."
+                  },
+                  {
+                    "type": "string",
+                    "description": "Explicit 'font-feature-settings' CSS property. A boolean can be passed instead if one only needs to turn on/off ligatures."
+                  }
+                ],
+                "description": "Configures font ligatures or font features. Can be either a boolean to enable/disable ligatures or a string for the value of the CSS 'font-feature-settings' property.",
+                "default": false,
+                "defaultDefaultValue": false,
+                "scope": 5,
+                "restricted": false
+              },
+              "editor.fontSize": {
+                "type": "number",
+                "minimum": 6,
+                "maximum": 100,
+                "default": 14,
+                "description": "Controls the font size in pixels.",
+                "defaultDefaultValue": 14,
+                "scope": 5,
+                "restricted": false
+              },
+              "editor.fontWeight": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 1,
+                    "maximum": 1000,
+                    "errorMessage": "Only \"normal\" and \"bold\" keywords or numbers between 1 and 1000 are allowed."
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^(normal|bold|1000|[1-9][0-9]{0,2})$"
+                  },
+                  {
+                    "enum": [
+                      "normal",
+                      "bold",
+                      "100",
+                      "200",
+                      "300",
+                      "400",
+                      "500",
+                      "600",
+                      "700",
+                      "800",
+                      "900"
+                    ]
+                  }
+                ],
+                "default": "normal",
+                "description": "Controls the font weight. Accepts \"normal\" and \"bold\" keywords or numbers between 1 and 1000.",
+                "defaultDefaultValue": "normal",
+                "scope": 5,
+                "restricted": false
+              },
+              "editor.fontVariations": {
+                "anyOf": [
+                  {
+                    "type": "boolean",
+                    "description": "Enables/Disables the translation from font-weight to font-variation-settings. Change this to a string for fine-grained control of the 'font-variation-settings' CSS property."
+                  },
+                  {
+                    "type": "string",
+                    "description": "Explicit 'font-variation-settings' CSS property. A boolean can be passed instead if one only needs to translate font-weight to font-variation-settings."
+                  }
+                ],
+                "description": "Configures font variations. Can be either a boolean to enable/disable the translation from font-weight to font-variation-settings or a string for the value of the CSS 'font-variation-settings' property.",
+                "default": false,
+                "defaultDefaultValue": false,
+                "scope": 5,
+                "restricted": false
+              }
+            }
+          },
+          "description": "Your font profiles"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "font-profile.switch",
+        "title": "Font Profile: Switch the font profile"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --external vscode",
+    "dev": "nr build --watch",
+    "lint": "eslint .",
+    "vscode:prepublish": "nr build",
+    "publish": "vsce publish --no-dependencies",
+    "pack": "vsce package --no-dependencies",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "release": "bumpp && nr publish"
+  },
+  "devDependencies": {
+    "@antfu/ni": "^0.21.9",
+    "@types/node": "^20.9.0",
+    "@types/picomatch": "^2.3.3",
+    "@types/vscode": "1.83.0",
+    "@vscode/vsce": "^2.22.0",
+    "bumpp": "^9.2.0",
+    "eslint": "^8.53.0",
+    "esno": "^4.0.0",
+    "picomatch": "^3.0.1",
+    "pnpm": "^8.10.5",
+    "rimraf": "^5.0.5",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0",
+    "vitest": "^0.34.6"
+  }
+}
