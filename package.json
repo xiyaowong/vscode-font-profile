@@ -18,6 +18,10 @@
   "categories": [
     "Other"
   ],
+  "extensionKind": [
+    "ui",
+    "workspace"
+  ],
   "main": "./dist/index.js",
   "icon": "res/icon.png",
   "files": [
