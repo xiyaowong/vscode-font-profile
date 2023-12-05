@@ -2,7 +2,7 @@
   "publisher": "xiyaowong",
   "name": "font-profile",
   "displayName": "Font Profile",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "packageManager": "pnpm@8.10.5",
   "description": "A mini plugin used for managing font configurations.",
